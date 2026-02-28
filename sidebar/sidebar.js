@@ -10,7 +10,7 @@ marked.use({
 
 function renderMarkdown(text) {
   if (!text) return "";
-  return marked.parse(text);
+  return DOMPurify.sanitize(marked.parse(text));
 }
 
 var views = {
@@ -68,7 +68,10 @@ function renderChatThread(messages, streamingSummary, isStreaming) {
       // Thinking indicator — no text yet
       var thinkDiv = document.createElement("div");
       thinkDiv.className = "chat-message assistant thinking";
-      thinkDiv.innerHTML = '<span class="thinking-dots"><span>.</span><span>.</span><span>.</span></span>';
+      var dots = document.createElement("span");
+      dots.className = "thinking-dots";
+      for (var d = 0; d < 3; d++) { var dot = document.createElement("span"); dot.textContent = "."; dots.appendChild(dot); }
+      thinkDiv.appendChild(dots);
       thread.appendChild(thinkDiv);
     }
     thread.scrollTop = thread.scrollHeight;
@@ -111,7 +114,10 @@ function renderChatThread(messages, streamingSummary, isStreaming) {
       // Thinking indicator — waiting for first token
       var thinkDiv = document.createElement("div");
       thinkDiv.className = "chat-message assistant thinking";
-      thinkDiv.innerHTML = '<span class="thinking-dots"><span>.</span><span>.</span><span>.</span></span>';
+      var dots = document.createElement("span");
+      dots.className = "thinking-dots";
+      for (var d = 0; d < 3; d++) { var dot = document.createElement("span"); dot.textContent = "."; dots.appendChild(dot); }
+      thinkDiv.appendChild(dots);
       thread.appendChild(thinkDiv);
     }
   }

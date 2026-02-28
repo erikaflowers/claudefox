@@ -64,6 +64,13 @@ ClaudeFox adds a sidebar panel to Firefox that lets you analyze any web page usi
 - Purpose: Renders markdown in Claude's responses
 - Minified but unmodified from upstream
 
+**DOMPurify** (lib/purify.min.js)
+- Source: https://github.com/cure53/DOMPurify
+- CDN: https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js
+- License: Apache-2.0 / MPL-2.0
+- Purpose: Sanitizes all HTML output from marked.js before innerHTML assignment to prevent XSS
+- Minified but unmodified from upstream
+
 ---
 
 ## Category

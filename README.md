@@ -84,6 +84,7 @@ Example:
 
 - [Readability.js](https://github.com/mozilla/readability) (Apache-2.0) — Content extraction
 - [marked.js](https://github.com/markedjs/marked) (MIT) — Markdown rendering
+- [DOMPurify](https://github.com/cure53/DOMPurify) (Apache-2.0 / MPL-2.0) — HTML sanitization
 
 ## License
 
