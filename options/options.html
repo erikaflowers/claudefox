@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ClaudeFox Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div id="options-container">
+    <h1>ClaudeFox Settings</h1>
+
+    <section>
+      <label for="api-key">Anthropic API Key</label>
+      <input type="password" id="api-key" placeholder="sk-ant-..." autocomplete="off" spellcheck="false" />
+      <small>Stored locally in Firefox sync storage. Only sent to api.anthropic.com.</small>
+    </section>
+
+    <section>
+      <label for="model-select">Model</label>
+      <select id="model-select">
+        <option value="claude-haiku-4-5">Haiku 4.5 (fast, cheap)</option>
+        <option value="claude-sonnet-4-5-20250514">Sonnet 4.5 (balanced)</option>
+        <option value="claude-sonnet-4-20250514">Sonnet 4 (balanced)</option>
+      </select>
+    </section>
+
+    <section>
+      <label for="personality">Personality <span class="optional">(optional)</span></label>
+      <textarea id="personality" rows="8" placeholder="You are a sharp, slightly sardonic analyst who values clarity over politeness. You call out weak arguments directly. Use dry wit sparingly..."></textarea>
+      <small>Shapes how Claude responds — tone, style, perspective. This wraps around every mode prompt (Summarize, ELI5, etc.) like CLAUDE.md does for Claude Code. Leave blank for default Claude voice.</small>
+    </section>
+
+    <div class="actions">
+      <button id="btn-save">Save Settings</button>
+      <span id="save-status"></span>
+    </div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

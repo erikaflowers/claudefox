@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <span class="logo">ClaudeFox</span>
+      <div class="header-buttons">
+        <button id="btn-history" title="History">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 3.5a.5.5 0 01.5.5v4h3a.5.5 0 010 1H8a.5.5 0 01-.5-.5V4a.5.5 0 01.5-.5z"/>
+            <path d="M8 16A8 8 0 118 0a8 8 0 010 16zm7-8A7 7 0 101 8a7 7 0 0014 0z"/>
+          </svg>
+        </button>
+        <button id="btn-settings" title="Settings">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 4.754a3.246 3.246 0 100 6.492 3.246 3.246 0 000-6.492zM5.754 8a2.246 2.246 0 114.492 0 2.246 2.246 0 01-4.492 0z"/>
+            <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 01-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 01-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 01.52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 011.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 011.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 01.52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 01-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 01-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 002.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 001.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 00-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 00-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 00-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291a1.873 1.873 0 00-1.116-2.693l-.318-.094c-.835-.246-.835-1.428 0-1.674l.319-.094a1.873 1.873 0 001.115-2.692l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 002.692-1.116l.094-.318z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Idle state -->
+    <div id="state-idle" class="view">
+      <div class="mode-selector">
+        <button class="mode-btn active" data-mode="summarize">Summarize</button>
+        <button class="mode-btn" data-mode="takeaways">Takeaways</button>
+        <button class="mode-btn" data-mode="eli5">ELI5</button>
+        <button class="mode-btn" data-mode="deep">Deep Dive</button>
+        <button class="mode-btn" data-mode="actions">Actions</button>
+      </div>
+      <button id="btn-summarize" class="btn-primary">Analyze this page</button>
+    </div>
+
+    <!-- Loading state -->
+    <div id="state-loading" class="view hidden">
+      <div class="spinner-container">
+        <div class="spinner"></div>
+        <p id="loading-label">Reading page...</p>
+        <button id="btn-cancel" class="btn-cancel hidden">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Complete / Streaming state -->
+    <div id="state-complete" class="view hidden">
+      <div id="page-meta">
+        <span id="page-title" class="page-title"></span>
+        <span id="mode-label" class="mode-label"></span>
+        <span id="truncation-notice" class="notice hidden">Page was truncated</span>
+      </div>
+      <div id="chat-thread" class="chat-thread">
+        <!-- Conversation messages rendered here by JS -->
+      </div>
+      <div class="complete-footer">
+        <div class="actions">
+          <button id="btn-copy" class="btn-secondary">Copy</button>
+          <button id="btn-stop" class="btn-secondary btn-stop-style hidden">Stop</button>
+          <button id="btn-new" class="btn-secondary">New</button>
+        </div>
+        <div class="chat-input-bar">
+          <input type="text" id="chat-input" placeholder="Ask a follow-up..." autocomplete="off" />
+          <button id="btn-send" class="btn-send" title="Send">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M15.854 8.354a.5.5 0 000-.708l-7-7a.5.5 0 00-.708.708L14.293 7.5H1a.5.5 0 000 1h13.293l-6.147 6.146a.5.5 0 00.708.708l7-7z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- History view -->
+    <div id="state-history" class="view hidden">
+      <div class="history-header">
+        <span class="history-title">History</span>
+        <button id="btn-clear-history" class="btn-text">Clear all</button>
+      </div>
+      <div id="history-list" class="history-list"></div>
+      <div id="history-empty" class="history-empty hidden">
+        <p>No summaries yet.</p>
+      </div>
+    </div>
+
+    <!-- Error state -->
+    <div id="state-error" class="view hidden">
+      <div id="error-message" class="error-message"></div>
+      <div class="actions">
+        <button id="btn-retry" class="btn-secondary">Try again</button>
+        <button id="btn-open-settings" class="btn-secondary hidden">Open settings</button>
+      </div>
+    </div>
+  </div>
+  <script src="../lib/marked.min.js"></script>
+  <script src="sidebar.js"></script>
+</body>
+</html>
