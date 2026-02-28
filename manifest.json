@@ -10,7 +10,8 @@
       "strict_min_version": "109.0",
       "data_collection_permissions": {
         "technicalData": false,
-        "interactionData": false
+        "interactionData": false,
+        "required": false
       }
     }
   },
