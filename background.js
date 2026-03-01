@@ -214,6 +214,8 @@ async function requestPageContentAndSummarize(tab, mode) {
     summary: null,
     error: null,
     truncated: false,
+    messages: [],
+    pageContent: null,
   });
 
   let response;
